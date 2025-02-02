@@ -1,2 +1,3 @@
-export { default as EventFrom } from "./EventForm/EventFrom";
+export { default as EventForm } from "./EventForm/EventForm";
 export { default as EventList } from "./EventList/EventList";
+export { default as Navbar } from "./Navbar/Navbar";

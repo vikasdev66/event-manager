@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { FaRegImage } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { Form, Input, Button, Select, DatePicker } from "antd";
-import "./EventFrom.scss"
+import "./EventForm.scss";
 
 const { Option } = Select;
 
@@ -18,7 +18,19 @@ const EventForm = () => {
       <h2 className="event-title">Create New Event</h2>
       <div className="image-upload">
         <FaRegImage className="image-icon" />
-        <Button className="upload-btn">Add Photo</Button>
+        <input
+          type="file"
+          id="file-input"
+          accept="image/*"
+          style={{ display: "none" }} // Hide the default file input
+          // onChange={handleFileChange}
+        />
+        <Button
+          className="upload-btn"
+          onClick={() => document.getElementById("file-input").click()}
+        >
+          Add Photo
+        </Button>
       </div>
       <Form form={form} layout="vertical" onFinish={handleSubmit}>
         <Form.Item
