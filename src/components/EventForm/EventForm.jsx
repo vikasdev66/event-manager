@@ -1,29 +1,50 @@
-import React, { useState } from "react";
+import React from "react";
+import dayjs from "dayjs";
 import { FaRegImage } from "react-icons/fa";
-import { IoMdArrowDropdown } from "react-icons/io";
 import { Form, Input, Button, Select, DatePicker } from "antd";
+import { useMediaHandler, useLocalStorage } from "../../hooks";
 import "./EventForm.scss";
 
 const { Option } = Select;
 
 const EventForm = () => {
   const [form] = Form.useForm();
+  const [events, setEvents] = useLocalStorage("events", []);
+  const { media, handleMediaChange, mediaPreview } = useMediaHandler();
 
   const handleSubmit = (values) => {
-    console.log("Form Values:", values);
+    const newEvent = {
+      id: Date.now(),
+      community: values.community,
+      title: values.eventTitle,
+      date: `${dayjs(values.startTime).format(
+        "dddd, MMMM D, YYYY h:mm A"
+      )} - ${dayjs(values.endTime).format("dddd, MMMM D, YYYY h:mm A")}`,
+      location: values.location,
+      description: values.description,
+      media,
+    };
+    setEvents([...events, newEvent]);
+    handleMediaChange(null);
+    form.resetFields();
+    console.log("Form Values:", newEvent);
   };
 
   return (
     <div className="event-form">
       <h2 className="event-title">Create New Event</h2>
       <div className="image-upload">
-        <FaRegImage className="image-icon" />
+        {mediaPreview ? (
+          <img src={mediaPreview} alt="Media Preview" className="image-icon" />
+        ) : (
+          <FaRegImage className="image-icon" />
+        )}
         <input
           type="file"
           id="file-input"
           accept="image/*"
-          style={{ display: "none" }} // Hide the default file input
-          // onChange={handleFileChange}
+          style={{ display: "none" }}
+          onChange={handleMediaChange}
         />
         <Button
           className="upload-btn"

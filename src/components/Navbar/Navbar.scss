@@ -51,8 +51,18 @@
   }
 
   @media (max-width: 768px) {
-    .menu {
+    .hide-menu {
       display: none;
+    }
+    .navbar {
+      position: relative;
+    }
+    .menu {
+      flex-direction: column;
+      position: absolute;
+      right: 50px;
+      top: 20px;
+      background-color: white;
     }
 
     .menu-icon {

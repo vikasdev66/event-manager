@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^13.2.1",
     "antd": "^5.23.3",
     "date-fns": "^4.1.0",
+    "dayjs": "^1.11.13",
     "react": "^19.0.0",
     "react-datepicker": "^7.6.0",
     "react-dom": "^19.0.0",

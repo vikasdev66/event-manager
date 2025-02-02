@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaBars } from "react-icons/fa";
 import "./Navbar.scss";
 
 const Navbar = () => {
   const location = useLocation();
+  const [isToggle, setIsToggle] = useState(false);
+
+  const handleToggle = () => {
+    setIsToggle(!isToggle);
+  };
 
   return (
     <nav className="navbar">
@@ -12,7 +17,8 @@ const Navbar = () => {
         <h1 className="logo">
           <Link to="/">Event Manager</Link>
         </h1>
-        <div className="menu">
+
+        <div className={isToggle ? "menu" : "menu hide-menu"}>
           <Link to="/" className={location.pathname === "/" ? "active" : ""}>
             Events
           </Link>
@@ -29,7 +35,8 @@ const Navbar = () => {
             Community
           </Link>
         </div>
-        <button className="menu-icon">
+
+        <button className="menu-icon" onClick={handleToggle}>
           <FaBars />
         </button>
       </div>
